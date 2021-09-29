@@ -1,0 +1,26 @@
+/* its more a like bfs approach for the  shortest path */
+#include<bits/stdc++.h>
+using namespace std;
+vector<int>shortestpath(int V,vector<int>adj[],int src){
+  vector<int>dis(V,INT_MAX);
+  /* from here this algorithm comes to the introduction */
+  /* minimum priority queue created */
+  priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>q;
+  /* rest are same as bfs approach */
+  dis[src]=0;
+  q.push(make_pair(0,src));
+  while(!q.empty()){
+    int dist=q.top().first;
+    int f=q.top().second;
+    vector<pair<int,int>>::iterator it;
+    for(auto it:adj[f]){
+      int next=it.first;
+      int path=it.second;
+      if(dis[next]>path+dis[f]){
+        dis[next]=path+dis[f];
+        q.push(make_pair(dis[next],next));
+     }
+    }
+  }
+}
+   

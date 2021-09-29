@@ -1,0 +1,19 @@
+/* happy coding (dfs approach)  only function*/
+#include<bits/stdc++.h>
+using namespace std;
+void dfs(int n,vector<int>&dis,vector<int>adj[]){
+  dis[n]=0;
+  for(auto it:adj[n]){
+    if(dis[it]>dis[n]+1){
+      dis[it]=dis[n]+1;
+      dfs(it,dis,adj);
+    }
+  }  
+}
+vector<int>ShortestPath(int V,vector<int>adj[],int src){
+  vector<int>dis(V,INT_MAX);
+  dfs(src,dis,adj);
+  return dis;
+  
+}
+ 

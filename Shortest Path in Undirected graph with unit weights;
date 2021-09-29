@@ -1,0 +1,42 @@
+/*😊happy coding (approach bfs);*/
+#include<bits/stdc++.h>
+using namespace std;
+vector<int> shortestPath(int V,vector<int>adj[],int src){
+  
+/* first we will declare a distance vector with each element intializes with INT_MAX) */
+  vector<int>dis(V,INT_MAX);
+  /* we will take a queue data structure to store taht how to reach the adjacent node of a particular node with shortest distance) */
+  queue<int>q;
+  /* pushing the source node from where we will calculate the shortest distance for every node */
+  q.push(src);
+  /* we are taking this node as source node it means we are here intially so the distance will be zero for this node*/
+  dis[src]=0;
+  while(!q.empty()){
+    int f=q.front();
+    q.pop();
+    /* we are checking for every adjacent node for a particular node in queue in a order such that after this we will assign the minimum shortest path to reach from the parent node to all the 
+    ajacent node till the accomplition of that node in queue */
+    for(auto it:adj[f]){
+      if(dis[it]>dis[f]+1)dis[it]=dis[f]+1;
+    }
+  }
+}
+int main(){
+  int n,m;
+  cin>>n>>m;
+  vector<int>adj[];
+  for(int i=0;i<m;i++){
+    int u,v;
+    cin>>u>>v;
+    adj[u].push_back(u);
+    adj[v].pus_back(v);
+  }
+  int src;
+  cin>>src;
+  vector<int>v=shortestPath(n,adj,src);
+  for(auto it:v){
+    cout<<it;
+  }
+  return 0;
+}
+  

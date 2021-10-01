@@ -1,0 +1,56 @@
+/*first we need to do topological sort*/
+#include<bits/stdc++.h>
+using namespace std;
+void TopoSort(int n,vector<int>&vis,stack<int>&s,vector<int>adj[]){
+  vis[n]=1;
+  for(auto it:adj[n]){
+    if(vis[it]==0){
+      TopoSort(it,vis,s,adj);
+    }
+  }
+  s.push(n);
+}
+void rev(int n,vector<int>&vis,vector<int>transpose[]){
+  vis[n]=1;
+  for(auto it:transpose[n]){
+    if(vis[it]==0){
+      rev(it,vis,transpose);
+    }
+  }
+}
+int main(){
+  int n,m;
+  cin>>n>>m;
+  vector<int>adj[n];
+  for(int i=0;i<n;i++){
+    int u,v;
+    cin>>u>>v;
+    adj[u].push_back(v);
+  }
+  vector<int>vis(n,0);
+  stack<int>s;
+  for(int i=0;i<n;i++){
+    if(vis[i]==0){
+      TopoSort(i,vis,s,adj);
+    }
+  }
+  vector<int>transpose[n];
+  for(int i=0;i<n;i++){
+    vis[i]=0;
+    for(auto it:adj[i]){
+      transpose[it].push_back(i);
+    }
+  }
+  int count=0;
+  while(!s.empty()){
+    int f=s.top();
+    s.pop();
+    if(vis[f]==0){
+      count++;
+      rev(f,vis,transpose);
+    }
+ }
+ cout<<count;
+ return 0;
+ }
+  

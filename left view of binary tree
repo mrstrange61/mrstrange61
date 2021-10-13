@@ -12,8 +12,9 @@ vector<int>leftview(Node* node){
     q.pop();
     Node* n=f.first();
     if(m.find(l)==m.end())m[l]=n->data;
-    if(n->right!=NULL)q.push({n->right,l+1});
     if(n->left!=NULL)q.push({n->left,l+1});
+    if(n->right!=NULL)q.push({n->right,l+1});
+    
   }
   for(auto i:m){
     v.push_back(i.second);

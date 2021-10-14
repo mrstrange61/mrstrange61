@@ -1,0 +1,24 @@
+vector<int>rightview(Node* node){
+  vector<int>v;
+  if(node==NULL){
+    return v;
+    }
+  queue<pair<Node*,int>q;
+  map<int,int>m;
+  q.push({node,0});
+  while(!q.empty()){
+    auto f=q.front();
+    int l=f.second;
+    Node* n=f.first;
+    q.pop();
+    if(m.find(l)==m.end())m[l]=n->data;
+    if(n->right!=NULL)q.push({n->right,l+1});
+    if(n->left!=NULL)q.push({n->left,l-1});
+    
+    v.push_back(n->data);
+  }
+  for(auto i:m){
+    v.push_back(i.second());
+  }
+  return v;
+}
